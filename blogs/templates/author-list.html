@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Author List{% endblock %}
+
+{% block content %}
+    <h2 class="my-4">Authors</h2>
+    
+    <div class="list-group">
+        {% for author in authors %}
+            <div class="list-group-item list-group-item-action">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h5 class="mb-1">{{ author.name }}</h5>
+                            <small class="text-muted">Joined on {{ author.created_at|date:"F j, Y" }}</small>
+                        </div>
+                        <div class="col-md-1 text-right">
+                            <a href="{% url 'author-detail' author.id %}" class="btn btn-sm btn-outline-primary">View</a>
+                        </div>
+                        {% if request.user.is_superuser %}
+                            <div class="col-md-1 text-right">
+                                <a href="{% url 'author-update' author.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                            </div>
+                            <div class="col-md-1 text-right">
+                                <a href="{% url 'author-delete' author.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">No authors available.</p>
+        {% endfor %}
+    </div>
+    {% include 'includes/pagination.html' %}
+{% endblock %}

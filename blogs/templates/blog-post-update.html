@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Blog Post{% endblock %}
+
+{% block content %}
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <h2 class="border-bottom border-gray pb-2 mb-0">Update Blog Post</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Update Blog Post</button>
+        </form>
+    </div>
+    {% include 'includes/pagination.html' %}
+{% endblock %}

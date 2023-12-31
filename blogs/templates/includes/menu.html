@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'index' %}">My Blog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'author-list' %}">Authors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'category-list' %}">Categories</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blogpost-list' %}">Blog Posts</a>
+            </li>
+            {% if request.user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'author-create' %}">Create Author</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'category-create' %}">Create Category</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blogpost-create' %}">Create Blog Post</a>
+                </li>
+            {% elif request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blogpost-create' %}">Create Blog Post</a>
+                </li>
+            {% endif %}
+            {% if not request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

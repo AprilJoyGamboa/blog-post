@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Blog Post{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0">Create Blog Post</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.non_field_errors }}
+                            <div class="form-group">
+                                <label for="{{ form.title.id_for_label }}">Title</label>
+                                {{ form.title }}
+                                <small class="form-text text-muted">Enter a catchy title for your blog post.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.content.id_for_label }}">Content</label>
+                                {{ form.content }}
+                                <small class="form-text text-muted">Write the content of your blog post here.</small>
+                            </div>
+                            {% comment %} <div class="form-group">
+                                <label for="{{ form.author.id_for_label }}">Author</label>
+                                {{ form.author }}
+                            </div> {% endcomment %}
+                            <div class="form-group">
+                                <label for="{{ form.categories.id_for_label }}">Categories</label>
+                                {{ form.categories }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.image.id_for_label }}">Image</label>
+                                {{ form.image }}
+                                <small class="form-text text-muted">Upload an optional image for your blog post.</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create Blog Post</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'includes/pagination.html' %}
+{% endblock %}
